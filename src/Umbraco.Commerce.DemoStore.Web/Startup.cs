@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using Umbraco.Cms.Core.DependencyInjection;
+using Umbraco.Cms.Core.Notifications;
 using Umbraco.Extensions;
 
 namespace Umbraco.Commerce.DemoStore.Web
@@ -45,8 +46,9 @@ namespace Umbraco.Commerce.DemoStore.Web
             services.AddUmbraco(_env, _config)
                 .AddBackOffice()
                 .AddWebsite()
+                .AddNotificationHandler<ContentSavingNotification, SchedulePublishBreakingSavingNotificationHandler>()
                 .AddDemoStore()
-                .AddComposers()
+                .AddComposers() 
                 .Build();
 #pragma warning restore IDE0022 // Use expression body for methods
 
